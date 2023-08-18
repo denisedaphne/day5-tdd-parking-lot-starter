@@ -3,12 +3,13 @@ package com.parkinglot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 public class ParkingLotTest {
 
     @Test
     void should_return_the_ticket_when_fetch_given_parking_lot_a_car() {
         //given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
          //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
@@ -19,7 +20,7 @@ public class ParkingLotTest {
     @Test
     void should_return_parked_car_when_fetch_given_parking_lot_with_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
         //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
@@ -31,7 +32,7 @@ public class ParkingLotTest {
     @Test
     void should_return_two_parked_cars_with_tickets_when_fetch_twice_given_parking_lot_two_cars_and_tickets() {
         //given
-        ParkingLot parkingLot = new ParkingLot(2);
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car1 = new Car();
         Car car2 = new Car();
          //when
@@ -46,7 +47,7 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_fetch_given_parking_lot_wrong_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot(10);
         ParkingTicket wrongTicket = new ParkingTicket();
          //when
         Car fetchCar = parkingLot.fetchCar(wrongTicket);
@@ -57,7 +58,7 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_fetch_given_parking_lot_used_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
          //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
