@@ -4,12 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
+
 public class ParkingLotTest {
 
     @Test
     void should_return_the_ticket_when_fetch_given_parking_lot_a_car() {
         //given
-        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
          //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
@@ -20,7 +21,7 @@ public class ParkingLotTest {
     @Test
     void should_return_parked_car_when_fetch_given_parking_lot_with_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
@@ -32,7 +33,7 @@ public class ParkingLotTest {
     @Test
     void should_return_two_parked_cars_with_tickets_when_fetch_twice_given_parking_lot_two_cars_and_tickets() {
         //given
-        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
         Car car2 = new Car();
          //when
@@ -47,7 +48,7 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_fetch_given_parking_lot_wrong_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot = new ParkingLot();
         ParkingTicket wrongTicket = new ParkingTicket();
          //when
         //then
@@ -58,7 +59,7 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_fetch_given_parking_lot_used_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
          //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
@@ -72,11 +73,16 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_park_given_parking_lot_no_position() {
         //given
-        ParkingLot parkingLot = new ParkingLot(0);
+        ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
+        Car extraCar = new Car();
          //when
-        ParkingTicket parkingTicket = parkingLot.parkCar(car);
+        parkingLot.parkCar(extraCar);
+
          //then
-        Assertions.assertNull(parkingTicket);
+        NoAvailablePositionException noAvailablePositionException = Assertions.assertThrows(NoAvailablePositionException.class, () ->{
+            parkingLot.parkCar(car);
+        });
+        Assertions.assertEquals("No available position", noAvailablePositionException.getMessage());
     }
 }
