@@ -10,29 +10,26 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-
-         //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
-
+         //when
          //then
         Assertions.assertNotNull(parkingTicket);
     }
 
     @Test
-    void should_return_parked_car_with_ticket_when_fetch_given_parking_lot() {
+    void should_return_parked_car_when_fetch_given_parking_lot_with_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
         //when
         Car fetchCar = parkingLot.fetchCar(parkingTicket);
-
         //then
         Assertions.assertEquals(car, fetchCar);
     }
     
     @Test
-    void should_return_parked_car_with_ticket_when_fetched_given_two_cars() {
+    void should_return_two_parked_cars_with_tickets_when_fetch_twice_given_parking_lot_two_cars_and_tickets() {
         //given
         ParkingLot parkingLot = new ParkingLot(2);
         Car car1 = new Car();
@@ -40,7 +37,6 @@ public class ParkingLotTest {
         ParkingTicket parkingTicket1 = parkingLot.parkCar(car1);
         ParkingTicket parkingTicket2 = parkingLot.parkCar(car2);
          //when
-
         Car fetchCar1 = parkingLot.fetchCar(parkingTicket1);
         Car fetchCar2 = parkingLot.fetchCar(parkingTicket2);
          //then
@@ -54,7 +50,6 @@ public class ParkingLotTest {
         ParkingTicket wrongTicket = new ParkingTicket();
          //when
         Car fetchCar = parkingLot.fetchCar(wrongTicket);
-         
          //then
         Assertions.assertNull(fetchCar);
     }
@@ -78,7 +73,6 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(0);
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
-         
          //when
          //then
         Assertions.assertNull(parkingTicket);
