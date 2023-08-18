@@ -71,5 +71,16 @@ public class ParkingLotTest {
          //then
         Assertions.assertNull(fetchCar);
     }
-
+    
+    @Test
+    void should_return_nothing_when_park_given_parking_lot_no_position() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
+         
+         //when
+         //then
+        Assertions.assertNull(parkingTicket);
+    }
 }
