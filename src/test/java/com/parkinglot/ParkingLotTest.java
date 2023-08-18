@@ -50,9 +50,9 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(10);
         ParkingTicket wrongTicket = new ParkingTicket();
          //when
-        Car fetchCar = parkingLot.fetchCar(wrongTicket);
+        Assertions.assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetchCar(wrongTicket));
+
          //then
-        Assertions.assertNull(fetchCar);
     }
     
     @Test
