@@ -22,11 +22,10 @@ public class ParkingLot {
     }
 
     public Car fetchCar(ParkingTicket ticket) {
-        Car car = parkingMap.get(ticket);
-        if(car != null){
-            parkingMap.remove(ticket);
-            return car;
+        Car car = parkingMap.remove(ticket);
+        if(car == null){
+            throw new UnrecognizedTicketException();
         }
-        return null;
+        return car;
     }
 }
