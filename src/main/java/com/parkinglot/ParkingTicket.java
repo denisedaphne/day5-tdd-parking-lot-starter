@@ -1,9 +1,10 @@
 package com.parkinglot;
 
 public class ParkingTicket {
-    int parkingTicket;
+    private int parkingTicket;
 
     public ParkingTicket(){
+
     }
 
 }
