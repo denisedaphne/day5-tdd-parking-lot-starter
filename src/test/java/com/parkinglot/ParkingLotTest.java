@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 public class ParkingLotTest {
 
     @Test
-    void should_return_the_car_when_fetch_given_parking_lot_a_car() {
+    void should_return_the_ticket_when_fetch_given_parking_lot_a_car() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingLot.parkCar(car);
          //when
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
          //then
         Assertions.assertNotNull(parkingTicket);
     }
@@ -21,8 +21,8 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingLot.parkCar(car);
         //when
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
         Car fetchCar = parkingLot.fetchCar(parkingTicket);
         //then
         Assertions.assertEquals(car, fetchCar);
@@ -34,9 +34,9 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(2);
         Car car1 = new Car();
         Car car2 = new Car();
+         //when
         ParkingTicket parkingTicket1 = parkingLot.parkCar(car1);
         ParkingTicket parkingTicket2 = parkingLot.parkCar(car2);
-         //when
         Car fetchCar1 = parkingLot.fetchCar(parkingTicket1);
         Car fetchCar2 = parkingLot.fetchCar(parkingTicket2);
          //then
@@ -59,8 +59,8 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingLot.parkCar(car);
          //when
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
         parkingLot.fetchCar(parkingTicket);
         Car fetchCar = parkingLot.fetchCar(parkingTicket);
          //then
@@ -72,8 +72,8 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot(0);
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingLot.parkCar(car);
          //when
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
          //then
         Assertions.assertNull(parkingTicket);
     }
