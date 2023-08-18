@@ -1,8 +1,7 @@
 package com.parkinglot;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertNotNull;
 
 public class ParkingLotTest {
 
@@ -16,7 +15,7 @@ public class ParkingLotTest {
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
 
          //then
-        assertNotNull(parkingTicket);
+        Assertions.assertNotNull(parkingTicket);
     }
 
 }
