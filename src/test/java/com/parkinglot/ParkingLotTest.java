@@ -23,9 +23,8 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
-
-        //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
+        //when
         Car fetchCar = parkingLot.fetchCar(parkingTicket);
 
         //then
@@ -48,16 +47,26 @@ public class ParkingLotTest {
         Assertions.assertEquals(car1, fetchCar1);
         Assertions.assertEquals(car2, fetchCar2);
     }
-    
     @Test
     void should_return_nothing_when_fetch_given_parking_lot_wrong_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
         ParkingTicket wrongTicket = new ParkingTicket();
          //when
         Car fetchCar = parkingLot.fetchCar(wrongTicket);
          
+         //then
+        Assertions.assertNull(fetchCar);
+    }
+    
+    @Test
+    void should_return_nothing_when_fetch_given_parking_lot_used_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
+         //when
+        Car fetchCar = parkingLot.fetchCar(parkingTicket);
          //then
         Assertions.assertNull(fetchCar);
     }
