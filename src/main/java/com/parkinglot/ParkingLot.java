@@ -5,16 +5,15 @@ import java.util.Map;
 
 public class ParkingLot {
     private final Map<ParkingTicket, Car> parkingMap;
-    private final int capacity;
+    private static final int CAPACITY = 10;
 
-    public ParkingLot(int capacity){
-        this.capacity = capacity;
+    public ParkingLot(){
         parkingMap = new HashMap<>();
 
     }
     public ParkingTicket parkCar(Car car) {
-        if(parkingMap.size() >= capacity){
-            return null;
+        if(parkingMap.size() >= CAPACITY){
+            throw new NoAvailablePositionException();
         }
         ParkingTicket ticket = new ParkingTicket();
         parkingMap.put(ticket, car);
