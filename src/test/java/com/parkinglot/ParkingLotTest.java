@@ -3,6 +3,8 @@ package com.parkinglot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class ParkingLotTest {
@@ -15,7 +17,7 @@ public class ParkingLotTest {
          //when
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
          //then
-        Assertions.assertNotNull(parkingTicket);
+        assertNotNull(parkingTicket);
     }
 
     @Test
@@ -27,7 +29,7 @@ public class ParkingLotTest {
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
         Car fetchCar = parkingLot.fetchCar(parkingTicket);
         //then
-        Assertions.assertEquals(car, fetchCar);
+        assertEquals(car, fetchCar);
     }
     
     @Test
@@ -42,8 +44,8 @@ public class ParkingLotTest {
         Car fetchCar1 = parkingLot.fetchCar(parkingTicket1);
         Car fetchCar2 = parkingLot.fetchCar(parkingTicket2);
          //then
-        Assertions.assertEquals(car1, fetchCar1);
-        Assertions.assertEquals(car2, fetchCar2);
+        assertEquals(car1, fetchCar1);
+        assertEquals(car2, fetchCar2);
     }
     @Test
     void should_return_nothing_when_fetch_given_parking_lot_wrong_ticket() {
@@ -53,7 +55,7 @@ public class ParkingLotTest {
          //when
         //then
         UnrecognizedTicketException exception = Assertions.assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetchCar(wrongTicket));
-        Assertions.assertEquals("Unrecognized parking ticket", exception.getMessage());
+        assertEquals("Unrecognized parking ticket", exception.getMessage());
     }
     
     @Test
@@ -66,23 +68,22 @@ public class ParkingLotTest {
         parkingLot.fetchCar(parkingTicket);
         //then
         UnrecognizedTicketException exception = Assertions.assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetchCar(parkingTicket));
-        Assertions.assertEquals("Unrecognized parking ticket", exception.getMessage());
+        assertEquals("Unrecognized parking ticket", exception.getMessage());
 
     }
     
     @Test
     void should_return_nothing_when_park_given_parking_lot_no_position() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-        Car extraCar = new Car();
-         //when
-        parkingLot.parkCar(extraCar);
 
-         //then
-        NoAvailablePositionException noAvailablePositionException = Assertions.assertThrows(NoAvailablePositionException.class, () ->{
-            parkingLot.parkCar(car);
-        });
-        Assertions.assertEquals("No available position", noAvailablePositionException.getMessage());
+        ParkingTicket parkingTicket = parkingLot.parkCar(car);
+
+        //when
+        //then
+        assertNotNull(parkingTicket);
+        NoAvailablePositionException noAvailablePositionException = Assertions.assertThrows(NoAvailablePositionException.class, () -> parkingLot.parkCar(new Car()));
+        assertEquals("No available position", noAvailablePositionException.getMessage());
     }
 }
