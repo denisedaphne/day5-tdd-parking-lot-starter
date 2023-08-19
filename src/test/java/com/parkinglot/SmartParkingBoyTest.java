@@ -128,7 +128,7 @@ public class SmartParkingBoyTest {
     @Test
     void should_return_error_message_when_park_car_given_smart_parking_boy_and_two_full_parking_lots_and_car() {
         //Given
-        List<Car> cars = IntStream.range(0, 5)
+        List<Car> cars = IntStream.range(0, 10)
                 .mapToObj(i -> new Car())
                 .collect(Collectors.toList());
 
