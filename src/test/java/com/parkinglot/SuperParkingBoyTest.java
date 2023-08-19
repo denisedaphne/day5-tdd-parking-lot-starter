@@ -46,5 +46,24 @@ public class SuperParkingBoyTest {
         assertEquals(19, secondParkingLot.getAvailableCapacity());
     }
 
-    
+    @Test
+    void should_park_to_second_parking_lot_when_park_given_super_parking_boy_and_second_parking_lot_has_larger_position_rate_and_car() {
+        //Given
+        List<Car> cars = IntStream.range(0, 5)
+                .mapToObj(i -> new Car())
+                .collect(Collectors.toList());
+
+        List<Car> cars2 = IntStream.range(0, 14)
+                .mapToObj(i -> new Car())
+                .collect(Collectors.toList());
+
+        cars.forEach(firstParkingLot::parkCar);
+        cars2.forEach(secondParkingLot::parkCar);
+        //When
+        ParkingTicket parkingTicket = superParkingBoy.park(new Car());
+        //Then
+        assertNotNull(parkingTicket);
+        assertEquals(5, firstParkingLot.getAvailableCapacity());
+        assertEquals(5, secondParkingLot.getAvailableCapacity());
+    }
 }
