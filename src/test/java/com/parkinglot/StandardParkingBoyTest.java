@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-
 public class StandardParkingBoyTest {
     ParkingLot firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
@@ -39,5 +38,20 @@ public class StandardParkingBoyTest {
         Assertions.assertNotNull(parkingTicket);
         Assertions.assertEquals(0, firstParkingLot.getAvailableCapacity());
         Assertions.assertEquals(9, secondParkingLot.getAvailableCapacity());
+    }
+
+    @Test
+    void should_return_the_right_car_for_each_ticket_when_fetch_car_given_standard_parking_boy_and_two_parking_lots_and_two_parking_tickets() {
+        //Given
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingTicket parkingTicket1 = standardParkingBoy.park(car1);
+        ParkingTicket parkingTicket2 = standardParkingBoy.park(car2);
+        //When
+        Car fetchedCar1 = standardParkingBoy.fetch(parkingTicket1);
+        Car fetchedCar2 = standardParkingBoy.fetch(parkingTicket2);
+        //Then
+        Assertions.assertEquals(car1, fetchedCar1);
+        Assertions.assertEquals(car2, fetchedCar2);
     }
 }
