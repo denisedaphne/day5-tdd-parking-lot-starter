@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.parkinglot.exception.UnrecognizedTicketException;
+import com.parkinglot.exception.NoAvailablePositionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -122,5 +123,24 @@ public class SmartParkingBoyTest {
             smartParkingBoy.fetch(unrecognizedTicket);
         });
         assertEquals("Unrecognized parking ticket", exception.getMessage());
+    }
+
+    @Test
+    void should_return_error_message_when_park_car_given_smart_parking_boy_and_two_full_parking_lots_and_car() {
+        //Given
+        List<Car> cars = IntStream.range(0, 5)
+                .mapToObj(i -> new Car())
+                .collect(Collectors.toList());
+
+        cars.forEach(car -> {
+            firstParkingLot.parkCar(car);
+            secondParkingLot.parkCar(car);
+        });
+        //When
+        NoAvailablePositionException exception = assertThrows(NoAvailablePositionException.class, () -> {
+            smartParkingBoy.park(new Car());
+        });
+        //Then
+        assertEquals("No available position", exception.getMessage());
     }
 }
