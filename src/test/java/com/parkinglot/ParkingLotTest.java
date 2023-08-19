@@ -5,6 +5,10 @@ import com.parkinglot.exception.UnrecognizedTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -77,12 +81,14 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_park_given_parking_lot_no_position() {
         //given
-        ParkingLot parkingLot = new ParkingLot(1);
-        Car car = new Car();
-        ParkingTicket parkingTicket = parkingLot.parkCar(car);
+        ParkingLot parkingLot = new ParkingLot();
+        List<Car> cars = IntStream.range(0, 10)
+                .mapToObj(i -> new Car())
+                .collect(Collectors.toList());
+
+        cars.forEach(parkingLot::parkCar);
         //when
         //then
-        assertNotNull(parkingTicket);
         NoAvailablePositionException noAvailablePositionException = Assertions.assertThrows(NoAvailablePositionException.class, () -> parkingLot.parkCar(new Car()));
         assertEquals("No available position", noAvailablePositionException.getMessage());
     }
