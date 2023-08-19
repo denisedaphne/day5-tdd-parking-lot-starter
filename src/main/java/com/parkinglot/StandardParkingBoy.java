@@ -5,11 +5,10 @@ import com.parkinglot.exception.UnrecognizedTicketException;
 
 import java.util.List;
 
-public class StandardParkingBoy {
-    private final List<ParkingLot> parkingLots;
+public class StandardParkingBoy extends ParkingBoy{
 
     public StandardParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     public ParkingTicket park(Car car) {

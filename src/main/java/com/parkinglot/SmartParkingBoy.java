@@ -7,10 +7,10 @@ import java.util.stream.Stream;
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 
-public class SmartParkingBoy {
-    private final List<ParkingLot> parkingLots;
+public class SmartParkingBoy extends ParkingBoy {
+
     public SmartParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     public ParkingTicket park(Car car) {
