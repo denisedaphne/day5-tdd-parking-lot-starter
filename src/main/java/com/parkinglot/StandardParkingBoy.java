@@ -16,13 +16,13 @@ public class StandardParkingBoy extends ParkingBoy{
                 .filter(ParkingLot::hasAvailableCapacity)
                 .findFirst()
                 .orElseThrow(NoAvailablePositionException::new)
-                .parkCar(car);
+                .park(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
         return parkingLots.stream()
                 .findFirst()
                 .orElseThrow(UnrecognizedTicketException::new)
-                .fetchCar(parkingTicket);
+                .fetch(parkingTicket);
     }
 }

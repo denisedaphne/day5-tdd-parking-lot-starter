@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private final Map<ParkingTicket, Car> parkingMap = new HashMap<>();
+    private final Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private static final int DEFAULT_CAPACITY = 10;
 
     private int capacity;
@@ -16,20 +16,20 @@ public class ParkingLot {
         this.capacity = DEFAULT_CAPACITY;
     }
 
-    private boolean isFull(){
-        return parkingMap.size() == capacity;
+    private boolean isCapacityFull(){
+        return parkingTicketCarMap.size() == capacity;
     }
-    public ParkingTicket parkCar(Car car) {
-        if(isFull()){
+    public ParkingTicket park(Car car) {
+        if(isCapacityFull()){
             throw new NoAvailablePositionException();
         }
         ParkingTicket ticket = new ParkingTicket();
-        parkingMap.put(ticket, car);
+        parkingTicketCarMap.put(ticket, car);
         return ticket;
     }
 
-    public Car fetchCar(ParkingTicket ticket) {
-        Car car = parkingMap.remove(ticket);
+    public Car fetch(ParkingTicket ticket) {
+        Car car = parkingTicketCarMap.remove(ticket);
         if(car == null){
             throw new UnrecognizedTicketException();
         }
@@ -37,15 +37,15 @@ public class ParkingLot {
     }
 
     public int getAvailableCapacity() {
-        return capacity - parkingMap.size();
+        return capacity - parkingTicketCarMap.size();
     }
 
     public boolean hasAvailableCapacity() {
-        return !isFull();
+        return !isCapacityFull();
     }
 
-    public double getPosition() {
-        return (double) parkingMap.size() / getCapacity();
+    public double getPositionRate() {
+        return (double) parkingTicketCarMap.size() / getCapacity();
     }
 
     public int getCapacity() {
@@ -55,5 +55,4 @@ public class ParkingLot {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-
 }

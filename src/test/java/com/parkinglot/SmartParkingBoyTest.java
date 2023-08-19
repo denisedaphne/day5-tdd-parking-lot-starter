@@ -32,10 +32,10 @@ public class SmartParkingBoyTest {
     void should_park_to_second_parking_lot_when_park_given_smart_parking_boy_and_two_parking_lots_first_parking_lot_is_full_and_car() {
         //Given
         List<Car> cars = IntStream.range(0, 10)
-                .mapToObj(i -> new Car())
+                .mapToObj(car -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(car -> firstParkingLot.parkCar(car));
+        cars.forEach(car -> firstParkingLot.park(car));
 
         //When
         ParkingTicket parkingTicket = smartParkingBoy.park(new Car());
@@ -49,10 +49,10 @@ public class SmartParkingBoyTest {
     void should_park_to_second_parking_lot_when_park_given_smart_parking_boy_and_second_parking_lot_has_more_positions_and_car() {
         //Given
         List<Car> cars = IntStream.range(0, 5)
-                .mapToObj(i -> new Car())
+                .mapToObj(car -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(car -> firstParkingLot.parkCar(car));
+        cars.forEach(car -> firstParkingLot.park(car));
 
         //When
         ParkingTicket parkingTicket = smartParkingBoy.park(new Car());
@@ -66,10 +66,10 @@ public class SmartParkingBoyTest {
     void should_park_to_first_parking_lot_when_park_given_smart_parking_boy_and_first_parking_lot_has_more_positions_and_car() {
         //Given
         List<Car> cars = IntStream.range(0, 5)
-                .mapToObj(i -> new Car())
+                .mapToObj(car -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(secondParkingLot::parkCar);
+        cars.forEach(secondParkingLot::park);
         //When
         ParkingTicket parkingTicket = smartParkingBoy.park(new Car());
         //Then
@@ -79,15 +79,15 @@ public class SmartParkingBoyTest {
     }
 
     @Test
-    void should_park_to_first_parking_lot_when_park_given_smart_parking_boy_and_both_parking_lots_has_equal_positions_and_car() {
+    void should_return_to_first_parking_lot_when_park_given_smart_parking_boy_and_second_parking_lot_has_more_cars_parked() {
         //Given
         List<Car> cars = IntStream.range(0, 5)
-                .mapToObj(i -> new Car())
+                .mapToObj(car -> new Car())
                 .collect(Collectors.toList());
 
         cars.forEach(car -> {
-            firstParkingLot.parkCar(car);
-            secondParkingLot.parkCar(car);
+            firstParkingLot.park(car);
+            secondParkingLot.park(car);
         });
 
         //When
@@ -143,12 +143,12 @@ public class SmartParkingBoyTest {
     void should_return_error_message_when_park_car_given_smart_parking_boy_and_two_full_parking_lots_and_car() {
         //Given
         List<Car> cars = IntStream.range(0, 10)
-                .mapToObj(i -> new Car())
+                .mapToObj(car -> new Car())
                 .collect(Collectors.toList());
 
         cars.forEach(car -> {
-            firstParkingLot.parkCar(car);
-            secondParkingLot.parkCar(car);
+            firstParkingLot.park(car);
+            secondParkingLot.park(car);
         });
         //When
         NoAvailablePositionException exception = assertThrows(NoAvailablePositionException.class, () -> {

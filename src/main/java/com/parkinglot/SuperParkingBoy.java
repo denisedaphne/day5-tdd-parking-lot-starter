@@ -15,17 +15,17 @@ public class SuperParkingBoy extends ParkingBoy{
     public ParkingTicket park(Car car) {
         return parkingLots.stream()
                 .filter(ParkingLot::hasAvailableCapacity)
-                .max(Comparator.comparingDouble(ParkingLot::getPosition))
+                .max(Comparator.comparingDouble(ParkingLot::getPositionRate))
                 .stream().findFirst()
                 .orElseThrow(NoAvailablePositionException::new)
-                .parkCar(car);
+                .park(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
         return parkingLots.stream()
                 .flatMap(parkingLot -> {
                     try {
-                        return Stream.of(parkingLot.fetchCar(parkingTicket));
+                        return Stream.of(parkingLot.fetch(parkingTicket));
                     } catch (UnrecognizedTicketException ignored) {
                         return Stream.empty();
                     }

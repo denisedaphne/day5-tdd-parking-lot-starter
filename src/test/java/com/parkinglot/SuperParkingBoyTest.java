@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SuperParkingBoyTest {
     ParkingLot firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
-    {
-        secondParkingLot.setCapacity(20);
-    }
 
     List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
     SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
+    @BeforeEach
+    void setUp() {
+        secondParkingLot.setCapacity(20);
+    }
     @Test
     void should_park_to_first_parking_lot_when_park_given_super_parking_boy_and_two_parking_lots_and_car() {
         //Given
@@ -40,7 +42,7 @@ public class SuperParkingBoyTest {
                 .mapToObj(i -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(firstParkingLot::parkCar);
+        cars.forEach(firstParkingLot::park);
         //When
         ParkingTicket parkingTicket = superParkingBoy.park(new Car());
         //Then
@@ -60,8 +62,8 @@ public class SuperParkingBoyTest {
                 .mapToObj(i -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(firstParkingLot::parkCar);
-        cars2.forEach(secondParkingLot::parkCar);
+        cars.forEach(firstParkingLot::park);
+        cars2.forEach(secondParkingLot::park);
         //When
         ParkingTicket parkingTicket = superParkingBoy.park(new Car());
         //Then
@@ -81,8 +83,8 @@ public class SuperParkingBoyTest {
                 .mapToObj(i -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(firstParkingLot::parkCar);
-        cars2.forEach(secondParkingLot::parkCar);
+        cars.forEach(firstParkingLot::park);
+        cars2.forEach(secondParkingLot::park);
         //When
         ParkingTicket parkingTicket = superParkingBoy.park(new Car());
         //Then
@@ -124,9 +126,7 @@ public class SuperParkingBoyTest {
         superParkingBoy.fetch(ticket);
         //When
         //Then
-        UnrecognizedTicketException exception = assertThrows(UnrecognizedTicketException.class, () -> {
-            superParkingBoy.fetch(ticket);
-        });
+        UnrecognizedTicketException exception = assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(ticket));
         assertEquals("Unrecognized parking ticket", exception.getMessage());
     }
 
@@ -141,12 +141,10 @@ public class SuperParkingBoyTest {
                 .mapToObj(i -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(firstParkingLot::parkCar);
-        cars2.forEach(secondParkingLot::parkCar);
+        cars.forEach(firstParkingLot::park);
+        cars2.forEach(secondParkingLot::park);
         //When
-        NoAvailablePositionException exception = assertThrows(NoAvailablePositionException.class, () -> {
-            superParkingBoy.park(new Car());
-        });
+        NoAvailablePositionException exception = assertThrows(NoAvailablePositionException.class, () -> superParkingBoy.park(new Car()));
         //Then
         assertEquals("No available position", exception.getMessage());
     }

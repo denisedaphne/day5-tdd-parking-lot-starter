@@ -18,14 +18,14 @@ public class SmartParkingBoy extends ParkingBoy {
                 .filter(ParkingLot::hasAvailableCapacity)
                 .max(Comparator.comparingInt(ParkingLot::getAvailableCapacity))
                 .orElseThrow(NoAvailablePositionException::new)
-                .parkCar(car);
+                .park(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
         return parkingLots.stream()
                 .flatMap(parkingLot -> {
                     try {
-                        return Stream.of(parkingLot.fetchCar(parkingTicket));
+                        return Stream.of(parkingLot.fetch(parkingTicket));
                     } catch (UnrecognizedTicketException ignored) {
                         return Stream.empty();
                     }

@@ -16,6 +16,7 @@ public class StandardParkingBoyTest {
     ParkingLot secondParkingLot = new ParkingLot();
     List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
     StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+
     @Test
     void should_park_to_first_parking_lot_when_park_given_standard_parking_boy_and_two_parking_lots_and_car() {
         //Given
@@ -35,7 +36,7 @@ public class StandardParkingBoyTest {
                 .mapToObj(i -> new Car())
                 .collect(Collectors.toList());
 
-        cars.forEach(car -> firstParkingLot.parkCar(car));
+        cars.forEach(car -> firstParkingLot.park(car));
         //When
         ParkingTicket parkingTicket = standardParkingBoy.park(new Car());
         //Then
@@ -89,8 +90,8 @@ public class StandardParkingBoyTest {
                 .collect(Collectors.toList());
 
         cars.forEach(car -> {
-            firstParkingLot.parkCar(car);
-            secondParkingLot.parkCar(car);
+            firstParkingLot.park(car);
+            secondParkingLot.park(car);
         });
 
         //When
