@@ -12,13 +12,16 @@ public class ParkingManager {
         this.ownedParkingLots = new ArrayList<>();
     }
 
-    public void addParkingBoy(ParkingBoy parkingBoy) {
+    public static boolean addParkingBoy(ParkingBoy parkingBoy) {
         parkingBoys.add(parkingBoy);
+        return true;
     }
 
     public static ParkingTicket parkCar(Car car, ParkingBoy parkingBoy) {
         return parkingBoy.park(car);
     }
+
+
 
     public static Car fetchCar(ParkingTicket ticket, ParkingBoy parkingBoy) {
         return parkingBoy.fetch(ticket);
