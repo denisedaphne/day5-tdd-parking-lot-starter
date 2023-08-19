@@ -17,7 +17,7 @@ public class SmartParkingBoy {
         return parkingLots.stream()
                 .filter(ParkingLot::hasAvailableCapacity)
                 .max(Comparator.comparingInt(ParkingLot::getAvailableCapacity))
-                .orElseThrow(NoAvailablePositionException::new)
+                .orElseThrow()
                 .parkCar(car);
     }
 
@@ -31,6 +31,6 @@ public class SmartParkingBoy {
                     }
                 })
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(UnrecognizedTicketException::new);
     }
 }
