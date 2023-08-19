@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedTicketException;
 
 public class SuperParkingBoy {
@@ -17,7 +18,7 @@ public class SuperParkingBoy {
                 .filter(ParkingLot::hasAvailableCapacity)
                 .max(Comparator.comparingDouble(ParkingLot::getPosition))
                 .stream().findFirst()
-                .orElseThrow()
+                .orElseThrow(NoAvailablePositionException::new)
                 .parkCar(car);
     }
 
