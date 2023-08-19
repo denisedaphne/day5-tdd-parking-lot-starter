@@ -19,9 +19,7 @@ public class ParkingLot {
         return parkingMap.size() == CAPACITY;
     }
     public ParkingTicket parkCar(Car car) {
-        System.out.println("inside");
         if(isFull()){
-            System.out.println("isFull");
             throw new NoAvailablePositionException();
         }
         ParkingTicket ticket = new ParkingTicket();

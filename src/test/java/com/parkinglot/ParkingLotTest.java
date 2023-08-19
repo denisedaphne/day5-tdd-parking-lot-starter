@@ -77,9 +77,7 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
-
         ParkingTicket parkingTicket = parkingLot.parkCar(car);
-
         //when
         //then
         assertNotNull(parkingTicket);
