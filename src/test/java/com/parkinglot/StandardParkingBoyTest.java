@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class StandardParkingBoyTest {
     ParkingLot firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
@@ -19,9 +21,9 @@ public class StandardParkingBoyTest {
         //When
         ParkingTicket parkingTicket = standardParkingBoy.park(car);
         //Then
-        Assertions.assertNotNull(parkingTicket);
-        Assertions.assertEquals(9, firstParkingLot.getAvailableCapacity());
-        Assertions.assertEquals(10, secondParkingLot.getAvailableCapacity());
+        assertNotNull(parkingTicket);
+        assertEquals(9, firstParkingLot.getAvailableCapacity());
+        assertEquals(10, secondParkingLot.getAvailableCapacity());
     }
 
     @Test
@@ -36,8 +38,8 @@ public class StandardParkingBoyTest {
         ParkingTicket parkingTicket = standardParkingBoy.park(new Car());
         //Then
         Assertions.assertNotNull(parkingTicket);
-        Assertions.assertEquals(0, firstParkingLot.getAvailableCapacity());
-        Assertions.assertEquals(9, secondParkingLot.getAvailableCapacity());
+        assertEquals(0, firstParkingLot.getAvailableCapacity());
+        assertEquals(9, secondParkingLot.getAvailableCapacity());
     }
 
     @Test
@@ -51,7 +53,17 @@ public class StandardParkingBoyTest {
         Car fetchedCar1 = standardParkingBoy.fetch(parkingTicket1);
         Car fetchedCar2 = standardParkingBoy.fetch(parkingTicket2);
         //Then
-        Assertions.assertEquals(car1, fetchedCar1);
-        Assertions.assertEquals(car2, fetchedCar2);
+        assertEquals(car1, fetchedCar1);
+        assertEquals(car2, fetchedCar2);
+    }
+
+    @Test
+    void should_return_error_message_when_fetch_car_given_standard_parking_boy_and_two_parking_lots_and_unrecognized_ticket() {
+        //Given
+        ParkingTicket unrecognizedTicket = new ParkingTicket();
+        //When
+        //Then
+        UnrecognizedTicketException exception = assertThrows(UnrecognizedTicketException.class, () -> standardParkingBoy.fetch(unrecognizedTicket));
+        assertEquals("Unrecognized parking ticket", exception.getMessage());
     }
 }
