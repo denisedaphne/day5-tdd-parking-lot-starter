@@ -76,4 +76,25 @@ public class SmartParkingBoyTest {
         assertEquals(5, secondParkingLot.getAvailableCapacity());
     }
 
+    @Test
+    void should_park_to_first_parking_lot_when_park_given_smart_parking_boy_and_both_parking_lots_has_equal_positions_and_car() {
+        //Given
+        List<Car> cars = IntStream.range(0, 5)
+                .mapToObj(i -> new Car())
+                .collect(Collectors.toList());
+
+        cars.forEach(car -> {
+            firstParkingLot.parkCar(car);
+            secondParkingLot.parkCar(car);
+        });
+
+        //When
+        ParkingTicket parkingTicket = smartParkingBoy.park(new Car());
+        //Then
+        assertNotNull(parkingTicket);
+        assertEquals(4, firstParkingLot.getAvailableCapacity());
+        assertEquals(5, secondParkingLot.getAvailableCapacity());
+    }
+
+
 }
