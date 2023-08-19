@@ -1,4 +1,4 @@
-package com.parkinglot;
+package com.parkinglot.exception;
 
 public class UnrecognizedTicketException extends RuntimeException{
     public UnrecognizedTicketException(){
