@@ -10,6 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class SuperParkingBoyTest {
     ParkingLot firstParkingLot = new ParkingLot();
     ParkingLot secondParkingLot = new ParkingLot();
+    {
+        secondParkingLot.setCapacity(20);
+    }
+
     List<ParkingLot> parkingLots = List.of(firstParkingLot, secondParkingLot);
     SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
     @Test

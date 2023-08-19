@@ -10,9 +10,13 @@ public class ParkingLot {
     private final Map<ParkingTicket, Car> parkingMap;
     private static int CAPACITY = 10;
 
+    private int capacity;
+
     public ParkingLot(){
         parkingMap = new HashMap<>();
+        this.capacity = CAPACITY;
     }
+
     public ParkingLot(int capacity){
         parkingMap = new HashMap<>();
         CAPACITY = capacity;
@@ -39,11 +43,23 @@ public class ParkingLot {
     }
 
     public int getAvailableCapacity() {
-        return CAPACITY - parkingMap.size();
+        return capacity - parkingMap.size();
     }
 
     public boolean hasAvailableCapacity() {
         return !isFull();
+    }
+
+    public double getPosition() {
+        return (double) parkingMap.size() / getCapacity();
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
 }
