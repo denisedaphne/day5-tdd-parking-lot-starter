@@ -31,6 +31,6 @@ public class SuperParkingBoy {
                     }
                 })
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(UnrecognizedTicketException::new);
     }
 }
