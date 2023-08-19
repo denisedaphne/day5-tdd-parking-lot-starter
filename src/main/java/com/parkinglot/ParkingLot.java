@@ -35,5 +35,12 @@ public class ParkingLot {
         return car;
     }
 
+    public int getAvailableCapacity() {
+        return CAPACITY - parkingMap.size();
+    }
+
+    public boolean hasAvailableCapacity() {
+        return !isFull();
+    }
 
 }
