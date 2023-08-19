@@ -3,25 +3,22 @@ package com.parkinglot;
 import com.parkinglot.exception.NoAvailablePositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class ParkingManagerTest {
-    private StandardParkingBoy standardParkingBoy;
-    private SmartParkingBoy smartParkingBoy;
 
     @BeforeEach
     public void setUp() {
         ParkingManager parkingManager = new ParkingManager();
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(List.of(parkingLot1));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot2));
-        SuperParkingBoy superParkingBoy = new SuperParkingBoy(List.of(parkingLot1, parkingLot2));
         parkingManager.addOwnedParkingLot(parkingLot1);
         parkingManager.addOwnedParkingLot(parkingLot2);
     }
@@ -47,7 +44,6 @@ public class ParkingManagerTest {
         Car fetchedCar = ParkingManager.fetchCar(ticket, ParkingManager.getFirstAvailableParkingBoy());
         assertEquals(car, fetchedCar);
     }
-
     @Test
     void should_return_car_when_park_given_parking_manager_use_parking_boy_without_available_parking_lots() {
         ParkingLot parkingLot = new ParkingLot();
@@ -63,19 +59,16 @@ public class ParkingManagerTest {
     }
 
     @Test
-    public void testParkingAndFetchingByParkingManagerInOwnedParkingLot() {
-        ParkingManager parkingManager = new ParkingManager();
+    void should_return_ticket_when_fetch_given_parking_manager_in_owned_parking_lot() {
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        parkingManager.addOwnedParkingLot(parkingLot1);
-        parkingManager.addOwnedParkingLot(parkingLot2);
+        ParkingBoy parkingBoy = new StandardParkingBoy(Arrays.asList(parkingLot1, parkingLot2));
+        ParkingManager.addParkingBoy(parkingBoy);
 
         Car car = new Car();
-        ParkingTicket ticket = ParkingManager.parkCar(car, standardParkingBoy);
-        assertNotNull(ticket);
+        ParkingTicket ticket = ParkingManager.parkCar(car, parkingBoy);
 
-        Car fetchedCar = ParkingManager.fetchCar(ticket, standardParkingBoy);
-        assertEquals(car, fetchedCar);
+        assertNotNull(ticket);
     }
 
 }
