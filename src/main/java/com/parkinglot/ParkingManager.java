@@ -1,11 +1,13 @@
 package com.parkinglot;
 
+import com.parkinglot.exception.NoAvailablePositionException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingManager {
     private static List<ParkingBoy> parkingBoys;
-    private final List<ParkingLot> ownedParkingLots;
+    public final List<ParkingLot> ownedParkingLots;
 
     public ParkingManager() {
         parkingBoys = new ArrayList<>();
@@ -21,7 +23,9 @@ public class ParkingManager {
         return parkingBoy.park(car);
     }
 
-
+    public void addOwnedParkingLot(ParkingLot parkingLot) {
+        ownedParkingLots.add(parkingLot);
+    }
 
     public static Car fetchCar(ParkingTicket ticket, ParkingBoy parkingBoy) {
         return parkingBoy.fetch(ticket);
@@ -31,6 +35,6 @@ public class ParkingManager {
         return parkingBoys.stream()
                 .filter(ParkingBoy::hasAvailableCapacity)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(NoAvailablePositionException::new);
     }
 }
