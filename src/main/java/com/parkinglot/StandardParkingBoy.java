@@ -16,4 +16,11 @@ public class StandardParkingBoy {
                 .orElseThrow(NoAvailablePositionException::new)
                 .parkCar(car);
     }
+
+    public Car fetch(ParkingTicket parkingTicket) {
+        return parkingLots.stream()
+                .findFirst()
+                .orElseThrow(UnrecognizedTicketException::new)
+                .fetchCar(parkingTicket);
+    }
 }
