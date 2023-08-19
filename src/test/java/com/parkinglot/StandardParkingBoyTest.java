@@ -78,4 +78,22 @@ public class StandardParkingBoyTest {
         UnrecognizedTicketException exception = assertThrows(UnrecognizedTicketException.class, () -> standardParkingBoy.fetch(ticket));
         assertEquals("Unrecognized parking ticket", exception.getMessage());
     }
+
+    @Test
+    void should_return_error_message_when_park_car_given_standard_parking_boy_and_two_full_parking_lots_and_car() {
+        //Given
+        List<Car> cars = IntStream.range(0, 10)
+                .mapToObj(i -> new Car())
+                .collect(Collectors.toList());
+
+        cars.forEach(car -> {
+            firstParkingLot.parkCar(car);
+            secondParkingLot.parkCar(car);
+        });
+
+        //When
+        NoAvailablePositionException exception = assertThrows(NoAvailablePositionException.class, () -> standardParkingBoy.park(new Car()));
+        //Then
+        assertEquals("No available position", exception.getMessage());
+    }
 }
