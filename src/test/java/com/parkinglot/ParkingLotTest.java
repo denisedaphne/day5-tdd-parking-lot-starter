@@ -48,7 +48,7 @@ public class ParkingLotTest {
         assertEquals(car2, fetchCar2);
     }
     @Test
-    void should_return_nothing_when_fetch_given_parking_lot_wrong_ticket() {
+    void should_return_error_message_when_fetch_given_parking_lot_wrong_ticket() {
         //given
         ParkingTicket wrongTicket = new ParkingTicket();
          //when
@@ -58,7 +58,7 @@ public class ParkingLotTest {
     }
     
     @Test
-    void should_return_nothing_when_fetch_given_parking_lot_used_ticket() {
+    void should_return_error_message_when_fetch_given_parking_lot_used_ticket() {
         //given
         Car car = new Car();
          //when
@@ -71,7 +71,7 @@ public class ParkingLotTest {
     }
     
     @Test
-    void should_return_nothing_when_park_given_parking_lot_no_position() {
+    void should_return_error_message_when_park_given_parking_lot_no_position() {
         //given
         List<Car> cars = IntStream.range(0, 10)
                 .mapToObj(i -> new Car())
